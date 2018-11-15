@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/brandon/android-take-home/takehome/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/brandon/android-take-home/takehome/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "7,3,5",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "350,148,240",
+                        "endColumns": "63,45,58",
+                        "endOffsets": "409,189,294"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,119,165",
+                        "endColumns": "63,45,58",
+                        "endOffsets": "114,160,219"
+                    }
+                }
+            ]
+        }
+    ]
+}

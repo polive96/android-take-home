@@ -1,0 +1,10 @@
+{
+  "com.fivestars.communication": {
+    "source": {
+      "type": "local",
+      "path": "CommunicationPlugin"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}
