@@ -21,6 +21,7 @@ The plugin is already created for you, called `CommunicationPlugin`, you'll just
 - Cordova is designed to work within an Android Activity, however chat heads work by running in an Android Service
   - You'll need to replicate (copy/paste and modify) the setup that Cordova provides in the `CordovaActivity` (mostly setting up some plumbing and creating/managing the actual webview)
   - Given that Cordova will internally use an Activity for things, you will have to modify the Cordova framework to NOT use an activity, possibly replacing with comparable code
+  - Not all of these need to be completely solved to get the bare minimum service running
 - Cordova uses Plugins to enable communication to the native side, you should be using that mechanism in order to get bi-directional communication.
   - It's up to you what messages you want to pass and how you demonstrate bi-directional communication
   - [plugin documentation](https://cordova.apache.org/docs/en/latest/guide/hybrid/plugins)
