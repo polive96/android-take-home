@@ -23,5 +23,5 @@ The plugin is already created for you, called `CommunicationPlugin`, you'll just
   - Given that Cordova will internally use an Activity for things, you will have to modify the Cordova framework to NOT use an activity, possibly replacing with comparable code
 - Cordova uses Plugins to enable communication to the native side, you should be using that mechanism in order to get bi-directional communication.
   - It's up to you what messages you want to pass and how you demonstrate bi-directional communication
-  - (https://cordova.apache.org/docs/en/latest/guide/hybrid/plugins/)[plugin documentation]
+  - [plugin documentation](https://cordova.apache.org/docs/en/latest/guide/hybrid/plugins)
 - The web app code will be located under `assets/www`
