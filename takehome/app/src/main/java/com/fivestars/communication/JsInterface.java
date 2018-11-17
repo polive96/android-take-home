@@ -1,4 +1,4 @@
-package com.fivestars.takehome;
+package com.fivestars.communication;
 
 import org.apache.cordova.CordovaWebView;
 
@@ -15,7 +15,5 @@ public class JsInterface {
                 + msg
                 + "', null, 'ALERT', 'DONE')");
     }
-
-
 
 }
