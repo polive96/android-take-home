@@ -7,4 +7,5 @@
     <!-- App label shown on the task switcher. -->
     <string name="activity_name">@string/launcher_name</string>
     <string name="native_button_text">Show Alert In WebView</string>
+    <string name="error_no_js_action">No Action Found By Plugin</string>
 </resources>

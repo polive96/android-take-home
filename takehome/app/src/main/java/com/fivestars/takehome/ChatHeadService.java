@@ -3,33 +3,22 @@ package com.fivestars.takehome;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.fivestars.communication.JsInterface;
 import com.fivestars.utils.Constants;
 
-import org.apache.cordova.ConfigXmlParser;
-import org.apache.cordova.CordovaActivity;
-import org.apache.cordova.CordovaInterfaceImpl;
-import org.apache.cordova.CordovaPreferences;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.CordovaWebViewImpl;
-import org.apache.cordova.PluginEntry;
-
-import java.util.ArrayList;
-
+import org.apache.cordova.CordovaWebViewFactory;
 public class ChatHeadService extends Service {
 
     //WindowManager refs
@@ -46,7 +35,7 @@ public class ChatHeadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //setup the webview
-        CordovaWebView webView = initializeWebView(intent.getStringExtra(Constants.BUNDLE_LAUNCH_URL));
+        CordovaWebView webView = CordovaWebViewFactory.getWebView(this, intent.getStringExtra(Constants.BUNDLE_LAUNCH_URL));
         //show the webview
         mWebViewContainer.addView(webView.getView());
         //setup Js Interface
@@ -166,52 +155,6 @@ public class ChatHeadService extends Service {
             }
         });
     }
-
-    @SuppressWarnings({"deprecation", "ResourceType"})
-    private CordovaWebView initializeWebView(String launchUrl) {
-        // Set the initial url to load
-        if (launchUrl==null) {
-            //else launch fivestars if none provided
-            launchUrl = "http://www.fivestars.com";
-        }
-        //init the webview
-        CordovaPreferences preferences = new CordovaPreferences();
-        CordovaWebView webview = new CordovaWebViewImpl(CordovaWebViewImpl.createEngine(this, preferences));
-        webview.getView().setId(100);
-        webview.getView().setLayoutParams(new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-        if (preferences.contains("BackgroundColor")) {
-            try {
-                int backgroundColor = preferences.getInteger("BackgroundColor", Color.BLACK);
-                // Background of activity:
-                webview.getView().setBackgroundColor(backgroundColor);
-            }
-            catch (NumberFormatException e){
-                e.printStackTrace();
-            }
-        }
-        CordovaInterfaceImpl cordovaInterface = new CordovaInterfaceImpl(new CordovaActivity()) {
-            @Override
-            public Object onMessage(String id, Object data) {
-                return data;
-            }
-        };
-        webview.getView().requestFocusFromTouch();
-        //init the plugin interface
-        ArrayList<PluginEntry> pluginEntries;
-        ConfigXmlParser parser = new ConfigXmlParser();
-        parser.parse(this);
-        pluginEntries = parser.getPluginEntries();
-        if (!webview.isInitialized()) {
-            webview.init(cordovaInterface, pluginEntries, preferences);
-        }
-        cordovaInterface.onCordovaInit(webview.getPluginManager());
-        //load the initial url
-        webview.loadUrl(launchUrl);
-        return webview;
-    }
-
 
     @Override
     public void onDestroy() {

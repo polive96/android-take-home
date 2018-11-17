@@ -2,6 +2,8 @@ package com.fivestars.communication;
 
 import android.widget.Toast;
 
+import com.fivestars.takehome.R;
+
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -26,7 +28,10 @@ public class CommunicationPlugin extends CordovaPlugin {
         if (action.equals("coolAlert")) {
             String message = args.getString(0);
             this.coolAlert(message, callbackContext);
+            callbackContext.success();
             return true;
+        } else {
+            callbackContext.error(webView.getContext().getString(R.string.error_no_js_action));
         }
         return false;
     }
