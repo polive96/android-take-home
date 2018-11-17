@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/chat_head_root"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--Close button-->
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="60dp"
+        android:src="@drawable/ic_close"
+        tools:ignore="ContentDescription"/>
+
+    <!--Profile image for the chat head.-->
+    <ImageView
+        android:id="@+id/chat_head_profile_iv"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/close_btn"
+        android:src="@drawable/ic_android_circle"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:id="@+id/webview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/chat_head_profile_iv"
+        android:orientation="vertical"
+        android:background="@drawable/customborder"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/alert_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/native_button_text"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -48,4 +48,29 @@ var app = {
     }
 };
 
+//shows a toast message in the android OS
+var showNativeAlert = function(msg) {
+    //send a message to the cordova alert plugin
+    cordova.exec(function(success) {}, //success callback
+             function(error) {}, //error callback
+             "CommunicationPlugin", //class name
+             "coolAlert", //action name
+             [msg] //arguments
+    );
+};
+
+
+//shows a javascript based toast message in the webview
+var showJsAlert = function(msg) {
+    M.toast({html: msg, classes: 'rounded'});
+}
+
+//add alert click functionality to the alert button
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('button').addEventListener('click',
+    function clickHandler(element) {
+       showNativeAlert('This is a message from the Webview to Android!');
+    });
+});
+
 app.initialize();

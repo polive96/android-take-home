@@ -1,23 +1,23 @@
 {
     "logs": [
         {
-            "outputFile": "/home/brandon/android-take-home/takehome/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/phillip/Projects/fivestars/takehome/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/home/brandon/android-take-home/takehome/app/src/main/res/values/strings.xml",
+                    "source": "/Users/phillip/Projects/fivestars/takehome/app/src/main/res/values/strings.xml",
                     "from": {
-                        "startLines": "7,3,5",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "350,148,240",
-                        "endColumns": "63,45,58",
-                        "endOffsets": "409,189,294"
+                        "startLines": "-1,-1,-1,8",
+                        "startColumns": "-1,-1,-1,4",
+                        "startOffsets": "-1,-1,-1,414",
+                        "endColumns": "-1,-1,-1,68",
+                        "endOffsets": "-1,-1,-1,478"
                     },
                     "to": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,119,165",
-                        "endColumns": "63,45,58",
-                        "endOffsets": "114,160,219"
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,119,165,224",
+                        "endColumns": "63,45,58,68",
+                        "endOffsets": "114,160,219,288"
                     }
                 }
             ]

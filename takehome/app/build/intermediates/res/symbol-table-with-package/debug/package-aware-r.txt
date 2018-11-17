@@ -1,7 +1,17 @@
 com.fivestars.takehome
-int drawable screen 0x7f010000
-int mipmap icon 0x7f020000
-int string activity_name 0x7f030000
-int string app_name 0x7f030001
-int string launcher_name 0x7f030002
-int xml config 0x7f040000
+drawable customborder
+drawable ic_android_circle
+drawable ic_close
+drawable screen
+id alert_button
+id chat_head_profile_iv
+id chat_head_root
+id close_btn
+id webview_container
+layout chat_head_layout
+mipmap icon
+string activity_name
+string app_name
+string launcher_name
+string native_button_text
+xml config

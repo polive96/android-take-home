@@ -113,3 +113,14 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+/* css to override what materialize has done */
+button
+{
+    border-radius:10px;
+    height:40px;
+    width:200px;
+    font-size:18px;
+    font-weight:normal;
+    text-align:center;
+}
