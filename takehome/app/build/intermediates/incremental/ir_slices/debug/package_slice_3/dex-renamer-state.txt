@@ -1,4 +1,0 @@
-#Fri Nov 16 22:05:59 CST 2018
-base.0=/Users/phillip/Projects/fivestars/takehome/app/build/intermediates/transforms/dexMerger/debug/3
-path.0=classes.dex
-renamed.0=classes.dex
