@@ -125,14 +125,17 @@ nativeToJsApi.actionChangeBackground = function() {
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#alert_button').addEventListener('click',
     function clickHandler(element) {
+       document.activeElement.blur();
        showNativeAlert('This is a message from the Webview to Android!');
     });
   document.querySelector('#minimize_button').addEventListener('click',
       function clickHandler(element) {
+         document.activeElement.blur();
          minimizeChatHead();
       });
   document.querySelector('#close_button').addEventListener('click',
       function clickHandler(element) {
+         document.activeElement.blur();
          closeChatHead();
       });
 });
