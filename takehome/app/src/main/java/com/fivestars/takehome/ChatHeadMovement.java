@@ -86,13 +86,15 @@ public class ChatHeadMovement {
     }
 
     private void handleMoveAction(MotionEvent event) {
-        //Calculate the X and Y coordinates of the view.
-        params.x = initialX + (int) (event.getRawX() - initialTouchX);
-        params.y = initialY + (int) (event.getRawY() - initialTouchY);
-        currentTouchX  = params.x;
-        currentTouchY = params.y;
-        //Update the layout with new X & Y coordinate
-        mWindowManager.updateViewLayout(mMainContainer, params);
+        if (mWebContainer.getVisibility() == View.GONE) {
+            //Calculate the X and Y coordinates of the view.
+            params.x = initialX + (int) (event.getRawX() - initialTouchX);
+            params.y = initialY + (int) (event.getRawY() - initialTouchY);
+            currentTouchX = params.x;
+            currentTouchY = params.y;
+            //Update the layout with new X & Y coordinate
+            mWindowManager.updateViewLayout(mMainContainer, params);
+        }
         lastAction = event.getAction();
     }
 

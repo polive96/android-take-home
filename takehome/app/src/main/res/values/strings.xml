@@ -6,6 +6,8 @@
     <string name="launcher_name">@string/app_name</string>
     <!-- App label shown on the task switcher. -->
     <string name="activity_name">@string/launcher_name</string>
-    <string name="native_button_text">Show Alert In WebView</string>
+    <string name="native_alert_button_text">Show Alert In WebView</string>
+    <string name="native_bg_button_text">Change WebView Background</string>
     <string name="error_no_js_action">No Action Found By Plugin</string>
+    <string name="webview_alert_msg">This is a message from Android to the Webview!</string>
 </resources>

@@ -45,7 +45,7 @@ public class ChatHeadService extends Service {
         //show the webview
         mWebViewContainer.addView(webView.getView());
         //setup Js Interface
-        mJsInterface = new JsInterface(webView);
+        mJsInterface = new JsInterface();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -65,7 +65,12 @@ public class ChatHeadService extends Service {
         //setup alert button
         Button alertButton  = mUiView.findViewById(R.id.alert_button);
         alertButton.setOnClickListener((View v) -> {
-            mJsInterface.sendAlert("This is a message from Android to the Webview!");
+            mJsInterface.sendAlert(getString(R.string.webview_alert_msg));
+        });
+        //setup change background button
+        Button changeBackgroundButton  = mUiView.findViewById(R.id.bgchange_button);
+        changeBackgroundButton.setOnClickListener((View v) -> {
+            mJsInterface.setRandomBackgroundColor();
         });
         //Set the close button.
         ImageView closeButton = mUiView.findViewById(R.id.close_btn);
@@ -95,7 +100,7 @@ public class ChatHeadService extends Service {
     }
 
     @Subscribe
-    public void onMessageEvent(ChatHeadActionEvent event) {
+    public void onChatHeadActionEvent(ChatHeadActionEvent event) {
         switch (event.getAction()) {
             case ChatHeadActionEvent.ACTION_TYPE_MINIMIZE:
                 mChatHeadMovement.minimizeChatHead();

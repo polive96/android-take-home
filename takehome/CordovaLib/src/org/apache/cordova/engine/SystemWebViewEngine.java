@@ -43,6 +43,9 @@ import org.apache.cordova.ICordovaCookieManager;
 import org.apache.cordova.LOG;
 import org.apache.cordova.NativeToJsMessageQueue;
 import org.apache.cordova.PluginManager;
+import org.apache.cordova.events.JavascriptActionEvent;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -104,6 +107,9 @@ public class SystemWebViewEngine implements CordovaWebViewEngine {
         this.pluginManager = pluginManager;
         this.nativeToJsMessageQueue = nativeToJsMessageQueue;
         webView.init(this, cordova);
+
+        //setup eventbus
+        EventBus.getDefault().register(this);
 
         initWebViewSettings();
 
@@ -300,6 +306,9 @@ public class SystemWebViewEngine implements CordovaWebViewEngine {
 
     @Override
     public void destroy() {
+        //destroy eventbus
+        EventBus.getDefault().unregister(this);
+        //destroy webview
         webView.chromeClient.destroyLastDialog();
         webView.destroy();
         // unregister the receiver
@@ -316,4 +325,28 @@ public class SystemWebViewEngine implements CordovaWebViewEngine {
     public void evaluateJavascript(String js, ValueCallback<String> callback) {
         webView.evaluateJavascript(js, callback);
     }
+
+    @Subscribe
+    public void onJavascriptActionEvent(JavascriptActionEvent event) {
+        String js = "nativeToJsApi."
+                + event.getAction()
+                + "("
+                + stringifyJsArgs(event.getArguments())
+                + ")";
+        evaluateJavascript(js, null);
+    }
+
+    //function to convert an array of js arguments to a string
+    //to be used in a javascript statement
+    private String stringifyJsArgs(String[] args) {
+        StringBuilder returnValue = new StringBuilder();
+        for (String arg: args) {
+            if (returnValue.length()!=0) {
+                returnValue.append(", ");
+            }
+            returnValue.append("'").append(arg).append("'");
+        }
+        return returnValue.toString();
+    }
+
 }

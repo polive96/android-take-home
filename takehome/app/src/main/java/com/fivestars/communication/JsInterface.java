@@ -1,23 +1,26 @@
 package com.fivestars.communication;
 
-import org.apache.cordova.CordovaServiceWebView;
+import org.apache.cordova.events.JavascriptActionEvent;
+import org.greenrobot.eventbus.EventBus;
 
 public class JsInterface {
 
-    private CordovaServiceWebView mWebView;
-
-    public JsInterface(CordovaServiceWebView webView) {
-        mWebView = webView;
-    }
-
     public void sendAlert(String msg) {
-        mWebView.loadUrl("javascript:showJsAlert('"
-                + msg
-                + "', null, 'ALERT', 'DONE')");
+        EventBus.getDefault().post(
+                new JavascriptActionEvent(
+                        JavascriptActionEvent.ACTION_TYPE_ALERT,
+                        new String[] { msg }
+                        )
+        );
     }
 
     public void setRandomBackgroundColor() {
-
+        EventBus.getDefault().post(
+                new JavascriptActionEvent(
+                        JavascriptActionEvent.ACTION_TYPE_CHANGE_BACKGROUND,
+                        new String[] { }
+                )
+        );
     }
 
 }

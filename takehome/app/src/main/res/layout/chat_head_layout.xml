@@ -38,8 +38,14 @@
             android:id="@+id/alert_button"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="@string/native_button_text"/>
-
+            android:layout_marginEnd="5dp"
+            android:text="@string/native_alert_button_text"/>
+        <Button
+            android:id="@+id/bgchange_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/native_bg_button_text"/>
 
     </LinearLayout>
 

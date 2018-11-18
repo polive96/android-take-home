@@ -48,6 +48,12 @@ var app = {
     }
 };
 
+
+
+
+//NATIVE FUNCTIONS
+//----------------------------
+
 //shows a toast message in the android OS
 var showNativeAlert = function(msg) {
     //send an alert message to the cordova communication plugin
@@ -79,10 +85,41 @@ var closeChatHead = function() {
         );
 };
 
+//----------------------------
+
+
+
+
+
+
+//NATIVE JS FUNCTIONS
+//----------------------------
+
+var nativeToJsApi = {};
 //shows a javascript based toast message in the webview
-var showJsAlert = function(msg) {
+nativeToJsApi.actionShowAlert = function(msg) {
     M.toast({html: msg, classes: 'rounded'});
-}
+};
+
+nativeToJsApi.actionChangeBackground = function() {
+    let colorArray = [];
+    for(let i =0; i < 3 ; i++){
+        colorArray.push(Math.floor(Math.random() * (255 - 0) + 0));
+    }
+    // rgb -> hex
+    let color = colorArray
+    .map( x => x.toString(16))
+    .join('');
+    document.body.style.background = "#" + color;
+};
+
+//----------------------------
+
+
+
+
+//HTML ELEMENT SETUP
+//----------------------------
 
 //add click functionality to the buttons on the screen
 document.addEventListener('DOMContentLoaded', function () {
@@ -100,4 +137,11 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 });
 
+//----------------------------
+
+
+
+
+
+//initialize cordova
 app.initialize();
