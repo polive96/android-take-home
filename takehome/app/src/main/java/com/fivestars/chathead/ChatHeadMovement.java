@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import java.util.Calendar;
+
 
 public class ChatHeadMovement {
 
@@ -24,6 +26,9 @@ public class ChatHeadMovement {
     //layout variables
     private int lastAction, initialX, initialY, currentTouchX, currentTouchY = 0;
     private float initialTouchX, initialTouchY;
+    //actual move detection vars
+    private static final int MAX_CLICK_DURATION = 200;
+    private long startClickTime;
 
     public ChatHeadMovement(Service service, View mainContainer, LinearLayout webContainer) {
         mMainContainer = mainContainer;
@@ -64,6 +69,8 @@ public class ChatHeadMovement {
     }
 
     private void handleDownAction(MotionEvent event) {
+        //record time of down action
+        startClickTime = Calendar.getInstance().getTimeInMillis();
         //remember the initial position.
         initialX = params.x;
         initialY = params.y;
@@ -74,15 +81,18 @@ public class ChatHeadMovement {
     }
 
     private void handleUpAction() {
-        //heck if the previous action was ACTION_DOWN
+        //check if the previous action was ACTION_DOWN
+        //and if it was not a movement
         //to identify if the user clicked the view or not.
-        if (lastAction == MotionEvent.ACTION_DOWN) {
+        long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
+        if (lastAction == MotionEvent.ACTION_DOWN && clickDuration < MAX_CLICK_DURATION) {
             if (mWebContainer.getVisibility() == View.VISIBLE) {
                 minimizeChatHead();
             } else {
                 maximizeChatHead();
             }
         }
+        lastAction = MotionEvent.ACTION_UP;
     }
 
     private void handleMoveAction(MotionEvent event) {
@@ -95,7 +105,6 @@ public class ChatHeadMovement {
             //Update the layout with new X & Y coordinate
             mWindowManager.updateViewLayout(mMainContainer, params);
         }
-        lastAction = event.getAction();
     }
 
     public void minimizeChatHead() {
