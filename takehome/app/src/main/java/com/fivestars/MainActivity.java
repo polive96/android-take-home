@@ -52,24 +52,12 @@ public class MainActivity extends CordovaActivity
         }
     }
 
-    /**
-     * Set and initialize the view elements.
-     */
-    private void showChatHeadView() {
-        //launch the chat head service
-        Intent intent = new Intent(MainActivity.this, ChatHeadService.class);
-        //intent.putExtras(mCordovaBundle);
-        intent.putExtra(Constants.BUNDLE_LAUNCH_URL, launchUrl);
-        startService(intent);
-        //close out the launching activity
-        finish();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
             //Check if the permission is granted or not.
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK ||
+                    (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(this))) {
                 showChatHeadView();
             } else { //Permission is not available
                 Toast.makeText(this,
@@ -81,6 +69,16 @@ public class MainActivity extends CordovaActivity
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    //function to show the chathead and hide the activity
+    private void showChatHeadView() {
+        //launch the chat head service
+        Intent intent = new Intent(MainActivity.this, ChatHeadService.class);
+        intent.putExtra(Constants.BUNDLE_LAUNCH_URL, launchUrl);
+        startService(intent);
+        //close out the launching activity
+        finish();
     }
 
 }
