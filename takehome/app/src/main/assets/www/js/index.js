@@ -55,7 +55,7 @@ var app = {
 //----------------------------
 
 //shows a toast message in the android OS
-var showNativeAlert = function(msg) {
+showNativeAlert = function(msg) {
     //send an alert message to the cordova communication plugin
     cordova.exec(function(success) {}, //success callback
              function(error) {}, //error callback
@@ -65,7 +65,7 @@ var showNativeAlert = function(msg) {
     );
 };
 
-var minimizeChatHead = function() {
+minimizeChatHead = function() {
     //send an minimize message to the cordova communication plugin
         cordova.exec(function(success) {}, //success callback
                  function(error) {}, //error callback
@@ -75,7 +75,7 @@ var minimizeChatHead = function() {
         );
 };
 
-var closeChatHead = function() {
+closeChatHead = function() {
     //send an close message to the cordova communication plugin
         cordova.exec(function(success) {}, //success callback
                  function(error) {}, //error callback
@@ -104,20 +104,15 @@ nativeToJsApi.actionShowAlert = function(msg) {
 
 //function to change the background color
 nativeToJsApi.actionChangeBackground = function() {
-    let colorArray = [];
-    for(let i =0; i < 3 ; i++){
-        colorArray.push(Math.floor(Math.random() * (255 - 0) + 0));
-    }
-    // rgb -> hex
-    let color = colorArray
-    .map( x => x.toString(16))
-    .join('');
-    document.body.style.background = "#" + color;
+    var colors = ["#0099cc","#c0c0c0","#587b2e","#990000","#000000","#1C8200","#987baa","#981890","#AA8971","#1987FC","#99081E"];
+    var bodybgarrayno = Math.floor(Math.random() * colors.length);
+    var selectedcolor = colors[bodybgarrayno];
+    document.body.style.backgroundColor = selectedcolor;
 };
 
 //function to toggle the cordova logo
 nativeToJsApi.actionToggleLogo = function() {
-    var logo = document.querySelector('#webview_logo');
+    logo = document.querySelector('#webview_logo');
     if (logo.height != 0) {
         logo.width = 0;
         logo.height = 0;
