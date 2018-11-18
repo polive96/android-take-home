@@ -34,11 +34,13 @@ public class MainActivity extends CordovaActivity
 {
 
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
+    private Bundle mCordovaBundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //save off bundle for use later
+        mCordovaBundle = savedInstanceState;
         //Check if the application has draw over other apps permission or not
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
@@ -58,6 +60,7 @@ public class MainActivity extends CordovaActivity
     private void showChatHeadView() {
         //launch the chat head service
         Intent intent = new Intent(MainActivity.this, ChatHeadService.class);
+        //intent.putExtras(mCordovaBundle);
         intent.putExtra(Constants.BUNDLE_LAUNCH_URL, launchUrl);
         startService(intent);
         //close out the launching activity

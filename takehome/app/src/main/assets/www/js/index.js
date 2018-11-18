@@ -50,27 +50,54 @@ var app = {
 
 //shows a toast message in the android OS
 var showNativeAlert = function(msg) {
-    //send a message to the cordova alert plugin
+    //send an alert message to the cordova communication plugin
     cordova.exec(function(success) {}, //success callback
              function(error) {}, //error callback
              "CommunicationPlugin", //class name
-             "coolAlert", //action name
+             "alert", //action name
              [msg] //arguments
     );
 };
 
+var minimizeChatHead = function() {
+    //send an minimize message to the cordova communication plugin
+        cordova.exec(function(success) {}, //success callback
+                 function(error) {}, //error callback
+                 "CommunicationPlugin", //class name
+                 "minimize", //action name
+                 [] //arguments
+        );
+};
+
+var closeChatHead = function() {
+    //send an close message to the cordova communication plugin
+        cordova.exec(function(success) {}, //success callback
+                 function(error) {}, //error callback
+                 "CommunicationPlugin", //class name
+                 "close", //action name
+                 [] //arguments
+        );
+};
 
 //shows a javascript based toast message in the webview
 var showJsAlert = function(msg) {
     M.toast({html: msg, classes: 'rounded'});
 }
 
-//add alert click functionality to the alert button
+//add click functionality to the buttons on the screen
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('button').addEventListener('click',
+  document.querySelector('#alert_button').addEventListener('click',
     function clickHandler(element) {
        showNativeAlert('This is a message from the Webview to Android!');
     });
+  document.querySelector('#minimize_button').addEventListener('click',
+      function clickHandler(element) {
+         minimizeChatHead();
+      });
+  document.querySelector('#close_button').addEventListener('click',
+      function clickHandler(element) {
+         closeChatHead();
+      });
 });
 
 app.initialize();

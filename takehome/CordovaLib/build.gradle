@@ -74,7 +74,11 @@ android {
         exclude 'META-INF/NOTICE'
     }
     defaultConfig {
-        minSdkVersion = 19
+        minSdkVersion 19
+    }
+
+    dependencies {
+        implementation 'com.nabinbhandari.android:permissions:3.7'
     }
 }
 

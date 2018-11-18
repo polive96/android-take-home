@@ -1,12 +1,12 @@
 package com.fivestars.communication;
 
-import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.CordovaServiceWebView;
 
 public class JsInterface {
 
-    private CordovaWebView mWebView;
+    private CordovaServiceWebView mWebView;
 
-    public JsInterface(CordovaWebView webView) {
+    public JsInterface(CordovaServiceWebView webView) {
         mWebView = webView;
     }
 
@@ -14,6 +14,10 @@ public class JsInterface {
         mWebView.loadUrl("javascript:showJsAlert('"
                 + msg
                 + "', null, 'ALERT', 'DONE')");
+    }
+
+    public void setRandomBackgroundColor() {
+
     }
 
 }

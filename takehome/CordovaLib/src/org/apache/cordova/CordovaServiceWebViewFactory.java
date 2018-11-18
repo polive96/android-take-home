@@ -1,18 +1,17 @@
 package org.apache.cordova;
 
-import android.content.Context;
+import android.app.Service;
 import android.graphics.Color;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 
 //cordova webview factory class
-public class CordovaWebViewFactory {
+public class CordovaServiceWebViewFactory {
 
     //method to generate a webview
     @SuppressWarnings({"deprecation", "ResourceType"})
-    public static CordovaWebView getWebView(Context context, String initUrl) {
+    public static CordovaServiceWebView createWebView(Service service, String initUrl) {
         // Set the initial url to load
         if (initUrl==null) {
             //else launch fivestars if none provided
@@ -20,11 +19,11 @@ public class CordovaWebViewFactory {
         }
         //init the webview
         CordovaPreferences preferences = new CordovaPreferences();
-        CordovaWebView webview = new CordovaWebViewImpl(CordovaWebViewImpl.createEngine(context, preferences));
+        CordovaServiceWebView webview = new CordovaServiceWebViewImpl(CordovaServiceWebViewImpl.createEngine(service.getBaseContext(), preferences));
         webview.getView().setId(100);
-        webview.getView().setLayoutParams(new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+        webview.getView().setLayoutParams(new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT));
         if (preferences.contains("BackgroundColor")) {
             try {
                 int backgroundColor = preferences.getInteger("BackgroundColor", Color.BLACK);
@@ -35,7 +34,7 @@ public class CordovaWebViewFactory {
                 e.printStackTrace();
             }
         }
-        CordovaInterfaceImpl cordovaInterface = new CordovaInterfaceImpl(new CordovaActivity()) {
+        CordovaServiceInterfaceImpl cordovaInterface = new CordovaServiceInterfaceImpl(service) {
             @Override
             public Object onMessage(String id, Object data) {
                 return data;
@@ -45,12 +44,11 @@ public class CordovaWebViewFactory {
         //init the plugin interface
         ArrayList<PluginEntry> pluginEntries;
         ConfigXmlParser parser = new ConfigXmlParser();
-        parser.parse(context);
+        parser.parse(service.getBaseContext());
         pluginEntries = parser.getPluginEntries();
         if (!webview.isInitialized()) {
             webview.init(cordovaInterface, pluginEntries, preferences);
         }
-        cordovaInterface.onCordovaInit(webview.getPluginManager());
         //load the initial url
         webview.loadUrl(initUrl);
         return webview;
