@@ -94,6 +94,11 @@ public class ChatHeadService extends Service {
         resetButton.setOnClickListener((View v) -> {
             resetWebView();
         });
+        //set the logo toggle button
+        Button toggleButton  = mUiView.findViewById(R.id.toggle_button);
+        toggleButton.setOnClickListener((View v) -> {
+            mJsInterface.toggleLogo();
+        });
         //Set the close button.
         ImageView closeButton = mUiView.findViewById(R.id.close_btn);
         closeButton.setOnClickListener((View v) -> {

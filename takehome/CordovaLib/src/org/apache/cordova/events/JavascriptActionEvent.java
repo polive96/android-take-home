@@ -4,6 +4,7 @@ public class JavascriptActionEvent {
 
     public static final String ACTION_TYPE_CHANGE_BACKGROUND = "actionChangeBackground";
     public static final String ACTION_TYPE_ALERT = "actionShowAlert";
+    public static final String ACTION_TYPE_TOGGLE_LOGO = "actionToggleLogo";
 
     private String action = "";
     private String[] arguments = null;

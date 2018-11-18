@@ -96,11 +96,13 @@ var closeChatHead = function() {
 //----------------------------
 
 var nativeToJsApi = {};
+
 //shows a javascript based toast message in the webview
 nativeToJsApi.actionShowAlert = function(msg) {
     M.toast({html: msg, classes: 'rounded'});
 };
 
+//function to change the background color
 nativeToJsApi.actionChangeBackground = function() {
     let colorArray = [];
     for(let i =0; i < 3 ; i++){
@@ -112,6 +114,18 @@ nativeToJsApi.actionChangeBackground = function() {
     .join('');
     document.body.style.background = "#" + color;
 };
+
+//function to toggle the cordova logo
+nativeToJsApi.actionToggleLogo = function() {
+    var logo = document.querySelector('#webview_logo');
+    if (logo.height != 0) {
+        logo.width = 0;
+        logo.height = 0;
+    } else {
+        logo.width = 50;
+        logo.height = 50;
+    }
+}
 
 //----------------------------
 

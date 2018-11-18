@@ -11,6 +11,7 @@
     <string name="native_bg_button_text">Change WebView Background</string>
     <string name="native_loadurl_button_text">Load Url</string>
     <string name="native_reset_button_text">Reset Webview</string>
+    <string name="native_togglelogo_button_text">Toggle Logo</string>
     <!-- Error Strings -->
     <string name="error_no_js_action">No Action Found By Plugin</string>
     <!-- System Messages -->
