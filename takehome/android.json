@@ -18,13 +18,13 @@
     }
   },
   "installed_plugins": {
-    "com.fivestars.communication": {
-      "PACKAGE_NAME": "com.fivestars.takehome"
+    "com.fivestars.communication.plugins": {
+      "PACKAGE_NAME": "com.fivestars"
     }
   },
   "dependent_plugins": {},
   "modules": [],
   "plugin_metadata": {
-    "com.fivestars.communication": "1.0.0"
+    "com.fivestars.communication.plugins": "1.0.0"
   }
 }

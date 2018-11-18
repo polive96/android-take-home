@@ -1,4 +1,4 @@
-package com.fivestars.takehome;
+package com.fivestars.chathead;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.fivestars.R;
 import com.fivestars.communication.JsInterface;
 import com.fivestars.events.ChatHeadActionEvent;
 import com.fivestars.utils.Constants;

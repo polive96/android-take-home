@@ -18,7 +18,7 @@
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
     <feature name="CommunicationPlugin">
-        <param name="android-package" value="com.fivestars.communication.CommunicationPlugin" />
+        <param name="android-package" value="com.fivestars.communication.plugins.CommunicationPlugin" />
         <param name="onload" value="true" />
     </feature>
 </widget>

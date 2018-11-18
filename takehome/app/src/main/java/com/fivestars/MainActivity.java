@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.fivestars.takehome;
+package com.fivestars;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.fivestars.chathead.ChatHeadService;
 import com.fivestars.utils.Constants;
 
 import org.apache.cordova.CordovaActivity;
@@ -34,13 +35,10 @@ public class MainActivity extends CordovaActivity
 {
 
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
-    private Bundle mCordovaBundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //save off bundle for use later
-        mCordovaBundle = savedInstanceState;
         //Check if the application has draw over other apps permission or not
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 

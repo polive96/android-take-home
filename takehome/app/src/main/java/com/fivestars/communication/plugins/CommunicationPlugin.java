@@ -1,9 +1,9 @@
-package com.fivestars.communication;
+package com.fivestars.communication.plugins;
 
 import android.widget.Toast;
 
 import com.fivestars.events.ChatHeadActionEvent;
-import com.fivestars.takehome.R;
+import com.fivestars.R;
 
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -15,8 +15,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 /**
- * This class shows a toast message using text that
- * is coming up from the javascript layer
+ * This class communicates action
+ * coming up from the javascript layer
+ * to the native interface
  */
 public class CommunicationPlugin extends CordovaPlugin {
 

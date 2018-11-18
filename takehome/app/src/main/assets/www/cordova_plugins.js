@@ -3,7 +3,7 @@ module.exports = [];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-  "com.fivestars.communication": "1.0.0"
+  "com.fivestars.communication.plugins": "1.0.0"
 };
 // BOTTOM OF METADATA
 });

@@ -1,5 +1,5 @@
 {
-  "com.fivestars.communication": {
+  "com.fivestars.communication.plugins": {
     "source": {
       "type": "local",
       "path": "CommunicationPlugin"

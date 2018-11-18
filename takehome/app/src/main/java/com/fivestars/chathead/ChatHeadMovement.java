@@ -1,4 +1,4 @@
-package com.fivestars.takehome;
+package com.fivestars.chathead;
 
 import android.app.Service;
 import android.content.Context;

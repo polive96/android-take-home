@@ -7,8 +7,8 @@
     "files": {}
   },
   "installed_plugins": {
-    "com.fivestars.communication": {
-      "PACKAGE_NAME": "com.fivestars.takehome"
+    "com.fivestars.communication.plugins": {
+      "PACKAGE_NAME": "com.fivestars"
     }
   },
   "dependent_plugins": {}

@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="com.fivestars.communication" version="1.0.0"
+<plugin id="com.fivestars.communication.plugins" version="1.0.0"
 	xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>CommunicationPlugin</name>
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="CommunicationPlugin">
-				<param name="android-package" value="com.fivestars.communication.CommunicationPlugin" />
+				<param name="android-package" value="com.fivestars.communication.plugins.CommunicationPlugin" />
 				<param name="onload" value="true" />
 			</feature>
 		</config-file>
