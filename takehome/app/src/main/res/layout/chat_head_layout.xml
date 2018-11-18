@@ -42,25 +42,12 @@
             android:layout_marginBottom="15dp"
             android:text="@string/native_alert_button_text"/>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/reset_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginBottom="15dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/loadurl_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="@string/native_loadurl_button_text"/>
-
-            <Button
-                android:id="@+id/reset_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="@string/native_reset_button_text"/>
-
-        </LinearLayout>
+            android:text="@string/native_reset_button_text"/>
 
         <Button
             android:id="@+id/toggle_button"
@@ -68,7 +55,6 @@
             android:layout_height="40dp"
             android:layout_marginBottom="15dp"
             android:text="@string/native_togglelogo_button_text"/>
-
 
         <Button
             android:id="@+id/bgchange_button"

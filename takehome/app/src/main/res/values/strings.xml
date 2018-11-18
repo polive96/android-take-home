@@ -9,7 +9,6 @@
     <!-- Button Labels -->
     <string name="native_alert_button_text">Show Alert In WebView</string>
     <string name="native_bg_button_text">Change WebView Background</string>
-    <string name="native_loadurl_button_text">Load Url</string>
     <string name="native_reset_button_text">Reset Webview</string>
     <string name="native_togglelogo_button_text">Toggle Logo</string>
     <!-- Error Strings -->

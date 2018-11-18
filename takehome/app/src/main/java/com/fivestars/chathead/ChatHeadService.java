@@ -1,10 +1,8 @@
 package com.fivestars.chathead;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -12,10 +10,8 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -51,14 +47,16 @@ public class ChatHeadService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //get the initial url
-        mLoadUrl = intent.getStringExtra(Constants.BUNDLE_LAUNCH_URL);
-        //setup the webview
-        mWebView = CordovaServiceWebViewFactory.createWebView(this, mLoadUrl);
-        //show the webview
-        mWebViewContainer.addView(mWebView.getView());
-        //setup Js Interface
-        mJsInterface = new JsInterface();
+        if (intent!=null) {
+            //get the initial url
+            mLoadUrl = intent.getStringExtra(Constants.BUNDLE_LAUNCH_URL);
+            //setup the webview
+            mWebView = CordovaServiceWebViewFactory.createWebView(this, mLoadUrl);
+            //show the webview
+            mWebViewContainer.addView(mWebView.getView());
+            //setup Js Interface
+            mJsInterface = new JsInterface();
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -84,15 +82,10 @@ public class ChatHeadService extends Service {
         changeBackgroundButton.setOnClickListener((View v) -> {
             mJsInterface.setRandomBackgroundColor();
         });
-        //setup the load url button
-        Button loadUrlButton  = mUiView.findViewById(R.id.loadurl_button);
-        loadUrlButton.setOnClickListener((View v) -> {
-            loadUrl();
-        });
         //setup the reset button
         Button resetButton  = mUiView.findViewById(R.id.reset_button);
         resetButton.setOnClickListener((View v) -> {
-            resetWebView();
+            mWebView.loadUrl(mLoadUrl);
         });
         //set the logo toggle button
         Button toggleButton  = mUiView.findViewById(R.id.toggle_button);
@@ -145,33 +138,6 @@ public class ChatHeadService extends Service {
                 break;
             default:
         }
-    }
-
-    //method for loading a url
-    //into the webview
-    private void loadUrl() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mUiView.getContext());
-        final EditText text_input = new EditText(this);
-        builder.setTitle("Enter Url");
-        builder.setView(text_input);
-        builder.setPositiveButton("Load", (dialog, id) -> {
-                        mWebView.loadUrl(text_input.getText().toString());
-                })
-                .setNegativeButton("Cancel", (dialog, id) -> {
-                        dialog.cancel();
-                });
-        AlertDialog dialog = builder.create();
-        Window dialogWindow = dialog.getWindow();
-        try {
-            dialogWindow.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        } catch (NullPointerException e) {}
-        dialog.show();
-    }
-
-    //method resetting the webview
-    //back to the original state
-    private void resetWebView() {
-        mWebView.loadUrl(mLoadUrl);
     }
 
 }
