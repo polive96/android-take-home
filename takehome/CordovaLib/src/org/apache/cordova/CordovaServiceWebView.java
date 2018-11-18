@@ -29,7 +29,7 @@ import java.util.Map;
  * Methods may be added to this interface without a major version bump, as plugins & embedders
  * are not expected to implement it.
  */
-public interface CordovaServiceWebView extends CordovaWebView {
+public interface CordovaServiceWebView {
 
     void init(CordovaServiceInterface cordova, List<PluginEntry> pluginEntries, CordovaPreferences preferences);
 
@@ -40,6 +40,8 @@ public interface CordovaServiceWebView extends CordovaWebView {
     void loadUrlIntoView(String url, boolean recreatePlugins);
 
     void stopLoading();
+
+    void handleDestroy();
 
     /** Use parameter-less overload */
     @Deprecated

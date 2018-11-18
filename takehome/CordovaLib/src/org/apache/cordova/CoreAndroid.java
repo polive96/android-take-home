@@ -83,11 +83,13 @@ public class CoreAndroid extends CordovaPlugin {
                 // This gets called from JavaScript onCordovaReady to show the webview.
                 // I recommend we change the name of the Message as spinner/stop is not
                 // indicative of what this actually does (shows the webview).
-                cordova.getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        webView.getPluginManager().postMessage("spinner", "stop");
-                    }
-                });
+                if (!(cordova instanceof CordovaServiceInterface)) {
+                    cordova.getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            webView.getPluginManager().postMessage("spinner", "stop");
+                        }
+                    });
+                }
             }
             else if (action.equals("loadUrl")) {
                 this.loadUrl(args.getString(0), args.optJSONObject(1));

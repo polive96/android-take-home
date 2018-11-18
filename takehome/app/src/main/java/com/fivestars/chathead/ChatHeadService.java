@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +30,8 @@ public class ChatHeadService extends Service {
     //ui elements to manipulate
     private LinearLayout mWebViewContainer;
     protected View mUiView;
+    //webview for service
+    CordovaServiceWebView mWebView;
     //chat head movement class
     private ChatHeadMovement mChatHeadMovement;
     //Js Interface class
@@ -42,9 +46,9 @@ public class ChatHeadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //setup the webview
-        CordovaServiceWebView webView = CordovaServiceWebViewFactory.createWebView(this, intent.getStringExtra(Constants.BUNDLE_LAUNCH_URL));
+        mWebView = CordovaServiceWebViewFactory.createWebView(this, intent.getStringExtra(Constants.BUNDLE_LAUNCH_URL));
         //show the webview
-        mWebViewContainer.addView(webView.getView());
+        mWebViewContainer.addView(mWebView.getView());
         //setup Js Interface
         mJsInterface = new JsInterface();
 
@@ -98,13 +102,21 @@ public class ChatHeadService extends Service {
         try {
             ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).removeView(mUiView);
         } catch (NullPointerException e) { e.printStackTrace(); }
+        //destroy webview
+        mWebView.handleDestroy();
     }
 
     @Subscribe
     public void onChatHeadActionEvent(ChatHeadActionEvent event) {
         switch (event.getAction()) {
             case ChatHeadActionEvent.ACTION_TYPE_MINIMIZE:
-                mChatHeadMovement.minimizeChatHead();
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mChatHeadMovement.minimizeChatHead();
+                    }
+                });
                 break;
             case ChatHeadActionEvent.ACTION_TYPE_CLOSE:
                 this.stopSelf();
