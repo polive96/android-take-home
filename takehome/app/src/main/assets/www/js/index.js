@@ -104,10 +104,10 @@ nativeToJsApi.actionShowAlert = function(msg) {
 
 //function to change the background color
 nativeToJsApi.actionChangeBackground = function() {
-    var colors = ["#0099cc","#c0c0c0","#587b2e","#990000","#000000","#1C8200","#987baa","#981890","#AA8971","#1987FC","#99081E"];
-    var bodybgarrayno = Math.floor(Math.random() * colors.length);
-    var selectedcolor = colors[bodybgarrayno];
-    document.body.style.backgroundColor = selectedcolor;
+    colors = ["#0099cc","#c0c0c0","#587b2e","#990000","#000000","#1C8200","#987baa","#981890","#AA8971","#1987FC","#99081E"];
+    bodybgarrayno = Math.floor(Math.random() * colors.length);
+    selectedcolor = colors[bodybgarrayno];
+    document.body.style.background = selectedcolor;
 };
 
 //function to toggle the cordova logo
