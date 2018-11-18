@@ -6,8 +6,8 @@ import android.view.WindowManager;
 
 import java.util.ArrayList;
 
-//cordova webview factory class
-public class CordovaServiceWebViewFactory {
+//cordova service based webview factory class
+public final class CordovaServiceWebViewFactory {
 
     //method to generate a webview
     @SuppressWarnings({"deprecation", "ResourceType"})
@@ -20,10 +20,13 @@ public class CordovaServiceWebViewFactory {
         //init the webview
         CordovaPreferences preferences = new CordovaPreferences();
         CordovaServiceWebView webview = new CordovaServiceWebViewImpl(CordovaServiceWebViewImpl.createEngine(service.getBaseContext(), preferences));
-        webview.getView().setId(100);
+        //set the id of the view
+        webview.getView().setId((int)(Math.random() * 500 + 100));
+        //set the intial layout
         webview.getView().setLayoutParams(new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT));
+        //set the background color
         if (preferences.contains("BackgroundColor")) {
             try {
                 int backgroundColor = preferences.getInteger("BackgroundColor", Color.BLACK);
@@ -34,6 +37,7 @@ public class CordovaServiceWebViewFactory {
                 e.printStackTrace();
             }
         }
+        //set the implementation
         CordovaServiceInterfaceImpl cordovaInterface = new CordovaServiceInterfaceImpl(service) {
             @Override
             public Object onMessage(String id, Object data) {
@@ -46,6 +50,7 @@ public class CordovaServiceWebViewFactory {
         ConfigXmlParser parser = new ConfigXmlParser();
         parser.parse(service.getBaseContext());
         pluginEntries = parser.getPluginEntries();
+        //init webview
         if (!webview.isInitialized()) {
             webview.init(cordovaInterface, pluginEntries, preferences);
         }

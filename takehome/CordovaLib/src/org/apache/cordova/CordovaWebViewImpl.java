@@ -48,29 +48,29 @@ public class CordovaWebViewImpl implements CordovaWebView {
 
     public static final String TAG = "CordovaWebViewImpl";
 
-    private PluginManager pluginManager;
+    protected PluginManager pluginManager;
 
     protected final CordovaWebViewEngine engine;
     private CordovaInterface cordova;
 
     // Flag to track that a loadUrl timeout occurred
-    private int loadUrlTimeout = 0;
+    protected int loadUrlTimeout = 0;
 
-    private CordovaResourceApi resourceApi;
-    private CordovaPreferences preferences;
-    private CoreAndroid appPlugin;
-    private NativeToJsMessageQueue nativeToJsMessageQueue;
-    private EngineClient engineClient = new EngineClient();
-    private boolean hasPausedEver;
+    protected CordovaResourceApi resourceApi;
+    protected CordovaPreferences preferences;
+    protected CoreAndroid appPlugin;
+    protected NativeToJsMessageQueue nativeToJsMessageQueue;
+    protected EngineClient engineClient = new EngineClient();
+    protected boolean hasPausedEver;
 
     // The URL passed to loadUrl(), not necessarily the URL of the current page.
     String loadedUrl;
 
     /** custom view created by the browser (a video player for example) */
-    private View mCustomView;
-    private WebChromeClient.CustomViewCallback mCustomViewCallback;
+    protected View mCustomView;
+    protected WebChromeClient.CustomViewCallback mCustomViewCallback;
 
-    private Set<Integer> boundKeyCodes = new HashSet<Integer>();
+    protected Set<Integer> boundKeyCodes = new HashSet<Integer>();
 
     public static CordovaWebViewEngine createEngine(Context context, CordovaPreferences preferences) {
         String className = preferences.getString("webview", SystemWebViewEngine.class.getCanonicalName());

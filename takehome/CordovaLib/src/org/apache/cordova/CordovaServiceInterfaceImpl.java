@@ -33,6 +33,7 @@ import com.nabinbhandari.android.permissions.Permissions;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -110,7 +111,18 @@ public class CordovaServiceInterfaceImpl implements CordovaServiceInterface {
                 Pair<CordovaPlugin, Integer> callback = permissionResultCallbacks.getAndRemoveCallback(mappedRequestCode);
                 if(callback != null) {
                     try {
-                        callback.first.onRequestPermissionResult(callback.second, permissions, new int[]{1});
+                        callback.first.onRequestPermissionResult(callback.second, permissions, new int[]{Activity.RESULT_OK});
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                Pair<CordovaPlugin, Integer> callback = permissionResultCallbacks.getAndRemoveCallback(mappedRequestCode);
+                if(callback != null) {
+                    try {
+                        callback.first.onRequestPermissionResult(callback.second, permissions, new int[]{Activity.RESULT_CANCELED});
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

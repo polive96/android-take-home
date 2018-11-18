@@ -19,55 +19,14 @@
 package org.apache.cordova;
 
 import android.app.Service;
-import android.content.Context;
-
-import java.util.concurrent.ExecutorService;
 
 /**
- * The Activity interface that is implemented by CordovaActivity.
+ * The Service interface that is implemented by CordovaServiceWebView.
  * It is used to isolate plugin development, and remove dependency on entire Cordova library.
+ * and also a way to provide alternative functionality down in the webview engine
  */
 public interface CordovaServiceInterface extends CordovaInterface {
-
-    /**
-     * Get the Android context.
-     *
-     * @return the Context
-     */
-    public Context getContext();
-
-    /**
-     * Called when a message is sent to plugin.
-     *
-     * @param id            The message id
-     * @param data          The message data
-     * @return              Object or null
-     */
-    public Object onMessage(String id, Object data);
-
-    /**
-     * Returns a shared thread pool that can be used for background tasks.
-     */
-    public ExecutorService getThreadPool();
-
-    /**
-     * Returns the base service behind the implementation
-     */
+    //signature for getting a reference
+    //to the parent service
     public Service getService();
-
-    /**
-     * Sends a permission request to the activity for one permission.
-     */
-    public void requestPermission(CordovaPlugin plugin, int requestCode, String permission);
-
-    /**
-     * Sends a permission request to the activity for a group of permissions
-     */
-    public void requestPermissions(CordovaPlugin plugin, int requestCode, String[] permissions);
-
-    /**
-     * Check for a permission.  Returns true if the permission is granted, false otherwise.
-     */
-    public boolean hasPermission(String permission);
-
 }
